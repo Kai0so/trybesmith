@@ -1,5 +1,5 @@
 import express from 'express';
-import ProductsController from '../src/controllers/productsController';
+import ProductsController from './controllers/productsController';
 
 const app = express();
 app.use(express.json());

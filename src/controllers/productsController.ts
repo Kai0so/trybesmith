@@ -5,8 +5,7 @@ class ProductsController {
   constructor(private bookService = new ProductsService()) { }
 
   public create = async (req: Request, res: Response) => {
-    const name: string = req.body.name;
-    const amount: string = req.body.amount;
+    const { name, amount }: { name: string; amount: string } = req.body;
     const product = { name, amount };
     const createdProduct = await this.bookService.create(product);
     res.status(201).json(createdProduct);
