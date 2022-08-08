@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
-import httpStatus from './helpers/httpStatus';
+import httpStatus from '../helpers/httpStatus';
 
 const Schema = Joi.object({
   name: Joi.string().min(3).required(),
