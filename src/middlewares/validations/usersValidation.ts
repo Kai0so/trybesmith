@@ -10,14 +10,16 @@ const Schema = Joi.object({
 
 });
 
-const validateUser = async (req: Request, res: Response, next: NextFunction) => {
+const validateUser = (req: Request, res: Response, next: NextFunction) => {
   const { username, classe, level, password } = req.body;
   const { error } = Schema.validate({ username, classe, level, password });
-  const data = [error];
-  const [result] = JSON.parse(JSON.stringify(data));
-  const { details } = result;
-  const errorType = details[0].type;
-  if (error) return res.status(httpStatus(errorType)).json({ message: error.message });
+  if (error) {
+    const data = [error];
+    const [result] = JSON.parse(JSON.stringify(data));
+    const { details } = result;
+    const errorType = details[0].type;
+    return res.status(httpStatus(errorType)).json({ message: error.message });
+  }
   next();
 };
 

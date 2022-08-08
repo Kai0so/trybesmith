@@ -7,14 +7,16 @@ const Schema = Joi.object({
   amount: Joi.string().min(3).required(),
 });
 
-const validateProduct = async (req: Request, res: Response, next: NextFunction) => {
+const validateProduct = (req: Request, res: Response, next: NextFunction) => {
   const { name, amount } = req.body;
   const { error } = Schema.validate({ name, amount });
-  const data = [error];
-  const [result] = JSON.parse(JSON.stringify(data));
-  const { details } = result;
-  const errorTyṕe = details[0].type;
-  if (error) return res.status(httpStatus(errorTyṕe)).json({ message: error.message });
+  if (error) {
+    const data = [error];
+    const [result] = JSON.parse(JSON.stringify(data));
+    const { details } = result;
+    const errorType = details[0].type;
+    return res.status(httpStatus(errorType)).json({ message: error.message });
+  }
   next();
 };
 
