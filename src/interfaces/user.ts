@@ -1,4 +1,4 @@
-interface Product {
+interface User {
   id?: number;
   username: string;
   classe: string;
@@ -6,4 +6,4 @@ interface Product {
   password: string;
 }
 
-export default Product;
+export default User;
